@@ -1,0 +1,35 @@
+{% extends 'boards/base.html' %}
+
+{% block title %}
+Главная - Trello Clone
+{% endblock %}
+
+{% block content %}
+<h2>Добро пожаловать в Trello Clone</h2>
+<p>Начните с создания задач и досок.</p>
+
+<div id="boards-container">
+    {% for board in boards %}
+    <div class="board" data-board-id="{{ board.id }}">
+        <h3>{{ board.name }}</h3>
+        <div class="task-list" data-board-id="{{ board.id }}">
+            {% if board.tasks.all %}
+            {% for task in board.tasks.all %}
+            <div class="task" data-task-id="{{ task.id }}" draggable="true">
+                <h4>{{ task.title }}</h4>
+                <p>{{ task.description }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="empty-board">
+                <p>Здесь пока нет задач. Перетащите задачу сюда!</p>
+            </div>
+            {% endif %}
+        </div>
+        <button class="add-task">+ Добавить задачу</button>
+    </div>
+    {% endfor %}
+</div>
+
+<button class="add-board">+ Добавить доску</button>
+{% endblock %}

@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Путь для панели администратора
-    path('', include('boards.urls')),  # Путь для маршрутов приложения boards
+    path('admin/', admin.site.urls),
+    path('api/', include('boards.urls')),  # Подключаем URL из boards
+    path('', include('boards.urls')),  # Подключаем URL для основного приложения
 ]
+
 
 
